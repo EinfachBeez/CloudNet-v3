@@ -18,6 +18,7 @@ package eu.cloudnetservice.modules.bridge.player;
 
 import eu.cloudnetservice.cloudnet.common.concurrent.CompletableTask;
 import eu.cloudnetservice.cloudnet.common.concurrent.Task;
+import eu.cloudnetservice.cloudnet.driver.CloudNetDriver;
 import eu.cloudnetservice.cloudnet.driver.network.rpc.annotation.RPCValidation;
 import eu.cloudnetservice.cloudnet.driver.service.ServiceEnvironmentType;
 import eu.cloudnetservice.modules.bridge.player.executor.PlayerExecutor;
@@ -27,12 +28,22 @@ import lombok.NonNull;
 import org.jetbrains.annotations.ApiStatus.Experimental;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.UnknownNullability;
 
 /**
  * This interfaces provides access to cloud players
  */
 @RPCValidation
 public interface PlayerManager {
+
+  /**
+   * Provides the first instance of this player manager found in the {@link eu.cloudnetservice.cloudnet.common.registry.ServicesRegistry}.
+   *
+   * @return the first instance.
+   */
+  static @UnknownNullability PlayerManager first() {
+    return CloudNetDriver.instance().servicesRegistry().firstService(PlayerManager.class);
+  }
 
   /**
    * Gets the amount of online players on the network

@@ -19,7 +19,9 @@ package eu.cloudnetservice.modules.syncproxy.platform.velocity;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import eu.cloudnetservice.cloudnet.common.registry.ServicesRegistry;
+import eu.cloudnetservice.cloudnet.driver.CloudNetDriver;
 import eu.cloudnetservice.ext.adventure.AdventureSerializerUtil;
+import eu.cloudnetservice.modules.syncproxy.SyncProxyManagement;
 import eu.cloudnetservice.modules.syncproxy.platform.PlatformSyncProxyManagement;
 import java.util.Collection;
 import java.util.UUID;
@@ -28,6 +30,7 @@ import lombok.NonNull;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 public final class VelocitySyncProxyManagement extends PlatformSyncProxyManagement<Player> {
 
@@ -38,6 +41,11 @@ public final class VelocitySyncProxyManagement extends PlatformSyncProxyManageme
     this.proxyServer = proxyServer;
     this.plugin = plugin;
     this.init();
+  }
+
+  public static @UnknownNullability VelocitySyncProxyManagement first() {
+    return (VelocitySyncProxyManagement) CloudNetDriver.instance().servicesRegistry()
+      .firstService(SyncProxyManagement.class);
   }
 
   @Override

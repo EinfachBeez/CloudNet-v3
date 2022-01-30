@@ -17,6 +17,8 @@
 package eu.cloudnetservice.modules.syncproxy.platform.bungee;
 
 import eu.cloudnetservice.cloudnet.common.registry.ServicesRegistry;
+import eu.cloudnetservice.cloudnet.driver.CloudNetDriver;
+import eu.cloudnetservice.modules.syncproxy.SyncProxyManagement;
 import eu.cloudnetservice.modules.syncproxy.platform.PlatformSyncProxyManagement;
 import java.util.Collection;
 import java.util.UUID;
@@ -28,6 +30,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 public final class BungeeCordSyncProxyManagement extends PlatformSyncProxyManagement<ProxiedPlayer> {
 
@@ -36,6 +39,11 @@ public final class BungeeCordSyncProxyManagement extends PlatformSyncProxyManage
   public BungeeCordSyncProxyManagement(@NonNull Plugin plugin) {
     this.plugin = plugin;
     this.init();
+  }
+
+  public static @UnknownNullability BungeeCordSyncProxyManagement first() {
+    return (BungeeCordSyncProxyManagement) CloudNetDriver.instance().servicesRegistry()
+      .firstService(SyncProxyManagement.class);
   }
 
   @Override

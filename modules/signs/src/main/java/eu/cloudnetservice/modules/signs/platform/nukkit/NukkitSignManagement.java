@@ -37,16 +37,17 @@ import eu.cloudnetservice.modules.signs.platform.AbstractPlatformSignManagement;
 import java.util.Set;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 public class NukkitSignManagement extends AbstractPlatformSignManagement<BlockEntitySign> {
 
   protected final Plugin plugin;
 
-  public NukkitSignManagement(Plugin plugin) {
+  public NukkitSignManagement(@NonNull Plugin plugin) {
     this.plugin = plugin;
   }
 
-  public static NukkitSignManagement defaultInstance() {
+  public static @UnknownNullability NukkitSignManagement first() {
     return (NukkitSignManagement) CloudNetDriver.instance().servicesRegistry()
       .firstService(SignManagement.class);
   }

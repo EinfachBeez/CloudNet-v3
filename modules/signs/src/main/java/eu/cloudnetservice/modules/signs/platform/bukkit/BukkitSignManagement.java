@@ -34,16 +34,17 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.NumberConversions;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 public class BukkitSignManagement extends AbstractPlatformSignManagement<org.bukkit.block.Sign> {
 
   protected final Plugin plugin;
 
-  protected BukkitSignManagement(Plugin plugin) {
+  protected BukkitSignManagement(@NonNull Plugin plugin) {
     this.plugin = plugin;
   }
 
-  public static BukkitSignManagement defaultInstance() {
+  public static @UnknownNullability BukkitSignManagement first() {
     return (BukkitSignManagement) CloudNetDriver.instance().servicesRegistry()
       .firstService(SignManagement.class);
   }

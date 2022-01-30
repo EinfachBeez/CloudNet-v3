@@ -48,7 +48,7 @@ public class NukkitSignsPlugin extends PluginBase {
 
   @Override
   public void onDisable() {
-    NukkitSignManagement.defaultInstance().unregisterFromServiceRegistry();
+    NukkitSignManagement.first().unregisterFromServiceRegistry();
     CloudNetDriver.instance().eventManager().unregisterListeners(this.getClass().getClassLoader());
   }
 }

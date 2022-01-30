@@ -17,12 +17,14 @@
 package eu.cloudnetservice.modules.npc.node;
 
 import eu.cloudnetservice.cloudnet.common.document.gson.JsonDocument;
+import eu.cloudnetservice.cloudnet.driver.CloudNetDriver;
 import eu.cloudnetservice.cloudnet.driver.database.Database;
 import eu.cloudnetservice.cloudnet.driver.event.EventManager;
 import eu.cloudnetservice.cloudnet.driver.network.buffer.DataBuf;
 import eu.cloudnetservice.modules.bridge.WorldPosition;
 import eu.cloudnetservice.modules.npc.AbstractNPCManagement;
 import eu.cloudnetservice.modules.npc.NPC;
+import eu.cloudnetservice.modules.npc.NPCManagement;
 import eu.cloudnetservice.modules.npc.configuration.NPCConfiguration;
 import eu.cloudnetservice.modules.npc.node.listeners.NodeChannelMessageListener;
 import eu.cloudnetservice.modules.npc.node.listeners.NodePluginIncludeListener;
@@ -34,6 +36,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.NonNull;
+import org.jetbrains.annotations.UnknownNullability;
 
 public final class NodeNPCManagement extends AbstractNPCManagement {
 
@@ -61,6 +64,10 @@ public final class NodeNPCManagement extends AbstractNPCManagement {
     eventManager.registerListener(new NodeSetupListener(this));
     eventManager.registerListener(new NodePluginIncludeListener(this));
     eventManager.registerListener(new NodeChannelMessageListener(this));
+  }
+
+  public static @UnknownNullability NodeNPCManagement first() {
+    return (NodeNPCManagement) CloudNetDriver.instance().servicesRegistry().firstService(NPCManagement.class);
   }
 
   static @NonNull String documentKey(@NonNull WorldPosition position) {

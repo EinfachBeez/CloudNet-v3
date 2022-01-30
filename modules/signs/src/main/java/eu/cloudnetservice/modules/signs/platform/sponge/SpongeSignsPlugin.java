@@ -63,7 +63,7 @@ public class SpongeSignsPlugin {
 
   @Listener
   public void handleShutdown(@NonNull StoppingEngineEvent<Server> event) {
-    SpongeSignManagement.defaultInstance().unregisterFromServiceRegistry();
+    SpongeSignManagement.first().unregisterFromServiceRegistry();
     CloudNetDriver.instance().eventManager().unregisterListeners(this.getClass().getClassLoader());
   }
 

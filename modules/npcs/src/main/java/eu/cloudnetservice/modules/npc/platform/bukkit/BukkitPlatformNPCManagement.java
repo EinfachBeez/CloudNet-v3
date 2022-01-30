@@ -19,12 +19,14 @@ package eu.cloudnetservice.modules.npc.platform.bukkit;
 import com.github.juliarn.npc.NPCPool;
 import com.github.juliarn.npc.modifier.LabyModModifier.LabyModAction;
 import com.google.common.base.Verify;
+import eu.cloudnetservice.cloudnet.driver.CloudNetDriver;
 import eu.cloudnetservice.cloudnet.driver.service.ServiceEnvironmentType;
 import eu.cloudnetservice.cloudnet.driver.service.ServiceInfoSnapshot;
 import eu.cloudnetservice.cloudnet.driver.service.ServiceLifeCycle;
 import eu.cloudnetservice.modules.bridge.WorldPosition;
 import eu.cloudnetservice.modules.npc.NPC;
 import eu.cloudnetservice.modules.npc.NPC.NPCType;
+import eu.cloudnetservice.modules.npc.NPCManagement;
 import eu.cloudnetservice.modules.npc.configuration.NPCConfiguration;
 import eu.cloudnetservice.modules.npc.platform.PlatformNPCManagement;
 import eu.cloudnetservice.modules.npc.platform.PlatformSelectorEntity;
@@ -41,6 +43,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.NumberConversions;
+import org.jetbrains.annotations.UnknownNullability;
 
 public class BukkitPlatformNPCManagement extends PlatformNPCManagement<Location, Player, ItemStack, Inventory> {
 
@@ -127,6 +130,10 @@ public class BukkitPlatformNPCManagement extends PlatformNPCManagement<Location,
         }
       }
     }, 20, 5);
+  }
+
+  public static @UnknownNullability BukkitPlatformNPCManagement first() {
+    return (BukkitPlatformNPCManagement) CloudNetDriver.instance().servicesRegistry().firstService(NPCManagement.class);
   }
 
   @NonNull

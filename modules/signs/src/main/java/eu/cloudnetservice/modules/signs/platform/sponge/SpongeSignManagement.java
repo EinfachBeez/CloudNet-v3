@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 import org.spongepowered.api.ResourceKey;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.block.entity.BlockEntity;
@@ -51,7 +52,7 @@ public class SpongeSignManagement extends AbstractPlatformSignManagement<org.spo
     this.syncExecutor = Sponge.server().scheduler().executor(plugin);
   }
 
-  public static SpongeSignManagement defaultInstance() {
+  public static @UnknownNullability SpongeSignManagement first() {
     return (SpongeSignManagement) CloudNetDriver.instance().servicesRegistry()
       .firstService(SignManagement.class);
   }

@@ -19,12 +19,15 @@ package eu.cloudnetservice.modules.syncproxy.platform.waterdog;
 import dev.waterdog.waterdogpe.ProxyServer;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 import eu.cloudnetservice.cloudnet.common.registry.ServicesRegistry;
+import eu.cloudnetservice.cloudnet.driver.CloudNetDriver;
+import eu.cloudnetservice.modules.syncproxy.SyncProxyManagement;
 import eu.cloudnetservice.modules.syncproxy.platform.PlatformSyncProxyManagement;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 public final class WaterDogPESyncProxyManagement extends PlatformSyncProxyManagement<ProxiedPlayer> {
 
@@ -33,6 +36,11 @@ public final class WaterDogPESyncProxyManagement extends PlatformSyncProxyManage
   public WaterDogPESyncProxyManagement(@NonNull ProxyServer proxyServer) {
     this.proxyServer = proxyServer;
     this.init();
+  }
+
+  public static @UnknownNullability WaterDogPESyncProxyManagement first() {
+    return (WaterDogPESyncProxyManagement) CloudNetDriver.instance().servicesRegistry()
+      .firstService(SyncProxyManagement.class);
   }
 
   @Override
